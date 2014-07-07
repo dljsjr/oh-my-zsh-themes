@@ -32,7 +32,7 @@ function gopath_set() {
   else
     cd $GOPATH
     REAL_GOPATH=$(pwd | sed "s/\/Users\/dstephen/\~/")
-    GO_INDICATOR="%{$fg_bold[green]%} [% GO:$REAL_GOPATH]% %{$reset_color%}"
+    GO_INDICATOR="%{$fg_bold[green]%} [% GOPATH:$REAL_GOPATH]% %{$reset_color%}"
     echo "${GO_INDICATOR}"
   fi
 }
