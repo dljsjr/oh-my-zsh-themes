@@ -1,4 +1,4 @@
-PROMPT='%{$fg_bold[yellow]%}➜ %{$fg_bold[white]%}%n%{$fg[blue]%} at %{$fg_bold[magenta]%}%m%{$fg_bold[yellow]%} %{$fg[blue]%}in %{$fg_bold[green]%}%p%{$fg[cyan]%}$(get_dir) %{$fg_bold[green]%} > % %{$reset_color%} '
+PROMPT='%{$fg_bold[yellow]%}➜ %{$fg_bold[white]%}%n%{$fg[blue]%} at %{$fg_bold[magenta]%}%m%{$fg_bold[yellow]%} %{$fg[blue]%}in %{$fg_bold[green]%}%p%{$fg[cyan]%}$(get_dir) $(cabal_sandbox_prompt)%{$fg_bold[green]%}> % %{$reset_color%} '
 RPROMPT='%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}$(svn_prompt_info)%{$reset_color%}$(gopath_set)%{$reset_color%}$(mode_prompt)'
  
 NORMAL_INDICATOR="%{$fg_bold[cyan]%} [% VI NORMAL MODE]% %{$reset_color%}"
@@ -34,5 +34,13 @@ function gopath_set() {
     REAL_GOPATH=$(pwd | sed "s/\/Users\/dstephen/\~/")
     GO_INDICATOR="%{$fg_bold[green]%} [% GOPATH:$REAL_GOPATH]% %{$reset_color%}"
     echo "${GO_INDICATOR}"
+  fi
+}
+
+function cabal_sandbox_prompt() {
+  INFO_STR=$(cabal_sandbox_info)
+  if [[ -n ${INFO_STR} ]]; then
+    SANDBOX_INDICATOR="%{$fg_bold[cyan]%}(% $INFO_STR%{$fg_bold[cyan]%})% %{$reset_color%} "
+    echo "${SANDBOX_INDICATOR}"
   fi
 }
