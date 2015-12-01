@@ -18,7 +18,7 @@ ZSH_THEME_SVN_PROMPT_DIRTY="%{$fg[yellow]%} ✘ %{$reset_color%}"
 ZSH_THEME_SVN_PROMPT_CLEAN=" "
 
 function get_dir() {
-  DIR=$(basename "`pwd`" | sed "s/dstephen/\~/")
+  DIR=$(basename "`pwd`" | sed 's/'"$USERNAME"'/\~/')
   echo "$DIR"
 }
 
@@ -31,7 +31,7 @@ function gopath_set() {
     echo ""
   else
     cd $GOPATH
-    REAL_GOPATH=$(pwd | sed "s/\/Users\/dstephen/\~/")
+    REAL_GOPATH=$(pwd | sed 's:'"$HOME"':\~:')
     GO_INDICATOR="%{$fg_bold[green]%} [% GOPATH:$REAL_GOPATH]% %{$reset_color%}"
     echo "${GO_INDICATOR}"
   fi
